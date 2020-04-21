@@ -1,0 +1,41 @@
+PODS:
+  - InputBarAccessoryView (4.3.2):
+    - InputBarAccessoryView/Core (= 4.3.2)
+  - InputBarAccessoryView/Core (4.3.2)
+  - IQKeyboardManagerSwift (6.5.5)
+  - MessageKit (3.1.0):
+    - InputBarAccessoryView (~> 4.3.0)
+  - MQTTClient (0.15.3):
+    - MQTTClient/Core (= 0.15.3)
+  - MQTTClient/Core (0.15.3):
+    - MQTTClient/Manager
+    - MQTTClient/Min
+  - MQTTClient/Manager (0.15.3):
+    - MQTTClient/Min
+  - MQTTClient/Min (0.15.3)
+  - SnapKit (5.0.1)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - MessageKit
+  - MQTTClient
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - InputBarAccessoryView
+    - IQKeyboardManagerSwift
+    - MessageKit
+    - MQTTClient
+    - SnapKit
+
+SPEC CHECKSUMS:
+  InputBarAccessoryView: 7985d418040a05fe894bd4b8328dd43ab35517c3
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  MessageKit: 3beb578737a5aa2bba25cc27c7b6d6faa09af5a7
+  MQTTClient: 0dfa04e789479c2e461786464969895c1fcb0875
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+
+PODFILE CHECKSUM: cf33cb50564354b5500d46b28b772f98b4b99a39
+
+COCOAPODS: 1.9.1

@@ -1,0 +1,6 @@
+framework module Pods_MQTTSample {
+  umbrella header "Pods-MQTTSample-umbrella.h"
+
+  export *
+  module * { export * }
+}
