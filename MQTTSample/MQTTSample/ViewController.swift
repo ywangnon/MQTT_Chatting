@@ -132,7 +132,7 @@ class ViewController: UIViewController {
             make.leading.equalTo(safeArea.snp.leading)
             make.trailing.equalTo(self.disConnectButton.snp.leading)
             make.height.equalTo(40)
-            make.top.equalTo(self.hostTextField.snp.bottom).offset(8)
+            make.top.equalTo(self.messageTextField.snp.bottom).offset(8)
         }
         
         self.disConnectButton.snp.makeConstraints { (make) in
@@ -232,7 +232,9 @@ extension ViewController: UITextFieldDelegate {
 }
 
 extension ViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 32
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -242,10 +244,12 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.messages[indexPath.row].isSender {
-            let messageCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+            let messageCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! MyCell
+            messageCell.messageLabel.text = self.messages[indexPath.row].message
             return messageCell
         } else {
-            let messageCell = tableView.dequeueReusableCell(withIdentifier: "otherCell", for: indexPath)
+            let messageCell = tableView.dequeueReusableCell(withIdentifier: "otherCell", for: indexPath) as! OtherCell
+            messageCell.messageLabel.text = self.messages[indexPath.row].message
             return messageCell
         }
     }
@@ -261,6 +265,9 @@ extension ViewController: MQTTSessionDelegate {
                 if let id = self.id {
                     let message = Message(id: mid, message: messageBody, isSender: userID == id, date: Date())
                     self.messages.append(message)
+                    DispatchQueue.main.async {
+                        self.chatTableView.reloadData()
+                    }
                 }
             }
         }
