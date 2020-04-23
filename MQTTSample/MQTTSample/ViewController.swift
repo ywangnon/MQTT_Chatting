@@ -162,6 +162,8 @@ class ViewController: UIViewController {
 
 // 버튼 액션 모음
 extension ViewController {
+    /// 연결 버튼, 해당 Broker에 연결되면 connectView가 초록색으로 바뀐다.
+    /// - Parameter sender: 버튼
     @objc func connect(_ sender: UIButton) {
         guard let host = self.hostTextField.text else {
             self.showAlert(controller: self, title: "오류", message: "주소를 입력해주세요.", alertStyle: .alert)
@@ -192,6 +194,8 @@ extension ViewController {
         })
     }
     
+    /// 연결 해제 버튼, 연결 해제되면 connectView가 초록색으로 바뀐다.
+    /// - Parameter sender: 버튼
     @objc func disconnect(_ sender: UIButton) {
         self.session?.close(disconnectHandler: { (error) in
             if error != nil {
@@ -205,6 +209,12 @@ extension ViewController {
 
 // 함수
 extension ViewController {
+    /// 경고창 생성 함수
+    /// - Parameters:
+    ///   - controller: 경고창을 띄울 컨트롤러
+    ///   - title: 경고창 타이틀
+    ///   - message: 경고창 메세지
+    ///   - alertStyle: alert스타일과 sheet스타일 중 고르면 된다.
     func showAlert(controller: UIViewController, title: String, message : String, alertStyle: UIAlertController.Style) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: alertStyle)
         let alertAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
@@ -214,6 +224,9 @@ extension ViewController {
 }
 
 extension ViewController: UITextFieldDelegate {
+    /// 텍스트필드 리턴 버튼을 누르면 텍스트필드의 텍스트를 Broker의 해당 Topic에 메세지를 구독한다.
+    /// - Parameter textField: 메세지가 입력된 텍스트필드
+    /// - Returns: Return 눌렀는지 확인
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let message = self.messageTextField.text,
             let id = self.id {
@@ -256,6 +269,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: MQTTSessionDelegate {
+    /// 연결된 Topic에 새로운 메세지가 오면 메세지 배열에 넣고 화면을 다시 불러온다.
     func newMessage(_ session: MQTTSession!, data: Data!, onTopic topic: String!, qos: MQTTQosLevel, retained: Bool, mid: UInt32) {
         print("New Message ID::: ", mid)
         
